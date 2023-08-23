@@ -1,0 +1,4 @@
+.navbar {
+	backdrop-filter: blur(10px);
+	background-color: #008b8b !important;
+}

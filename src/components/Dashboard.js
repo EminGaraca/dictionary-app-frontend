@@ -24,7 +24,7 @@ export const Dashboard = () => {
 	const getData = async (currentPage, currentPageSize) => {
 		setIsLoading(true);
 		await axios
-			.get(`/api/v1/synonyms/list?page=${currentPage}&pageSize=${currentPageSize}`)
+			.get(`https://dictionary-render.onrender.com/api/v1/synonyms/list?page=${currentPage}&pageSize=${currentPageSize}`)
 			.then((response) => {
 				const { words, allWords, page, totalPages, pageSize } = response.data;
 				setData(words);
@@ -78,7 +78,7 @@ export const Dashboard = () => {
 
 	const addWordHandler = () => {
 		axios
-			.post(`/api/v1/synonyms/add?word=${wordInput}&synonym=${synonymInput}`)
+			.post(`https://dictionary-render.onrender.com/api/v1/synonyms/add?word=${wordInput}&synonym=${synonymInput}`)
 			.then((response) => {
 				if (response.status === 200) {
 					setResponseMessage(response.data);
@@ -110,7 +110,7 @@ export const Dashboard = () => {
 
 	const getSynonymHandler = () => {
 		axios
-			.get(`/api/v1/synonyms/search/?word=${wordForSearch}`)
+			.get(`https://dictionary-render.onrender.com/api/v1/synonyms/search/?word=${wordForSearch}`)
 			.then((response) => {
 				if (response.status === 200) {
 					setReceivedSynonyms(response.data);

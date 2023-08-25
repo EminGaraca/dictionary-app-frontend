@@ -219,12 +219,12 @@ export const Dashboard = () => {
 			<Grid container justifyContent="center" spacing={1} sx={{ mt: 3 }}>
 				{getSynonymStatus === 200 && receivedSynonyms ? (
 					receivedSynonyms.map((item, index) => (
-						<Grid item xs={6} sm={4} md={3} lg={2} key={index}>
+						<Grid item key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
 							<Chip label={item} color="success" variant="outlined" style={{ color: '#a83264' }} />
 						</Grid>
 					))
 				) : (
-					<Box width="400px" margin="0 auto" visibility={synonymAlertVisible}>
+					<Box width="400px" margin="0 auto" visibility={synonymAlertVisible} sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
 						<Alert severity="error">{getSynonymMessage}</Alert>
 					</Box>
 				)}

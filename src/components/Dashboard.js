@@ -58,7 +58,7 @@ export const Dashboard = () => {
 	};
 
 	const addButtonStyle = {
-		width: 'calc(33% - 10px)',
+		width: '300px',
 		height: '55px',
 		backgroundColor: '#008b8b',
 		':hover': {
@@ -68,7 +68,7 @@ export const Dashboard = () => {
 
 	const getButtonStyle = {
 		marginLeft: '10px',
-		width: '350px',
+		width: '300px',
 		height: '55px',
 		backgroundColor: '#008b8b',
 		':hover': {
@@ -145,7 +145,8 @@ export const Dashboard = () => {
 			<Container maxWidth="lg">
 				<Box
 					display="flex"
-					justifyContent="space-between"
+					flexDirection="column"
+					justifyContent="center"
 					alignItems="center"
 					sx={{
 						marginY: '10px',
@@ -153,31 +154,68 @@ export const Dashboard = () => {
 						boxSizing: 'border-box',
 					}}
 				>
-					<TextField label="Word" sx={{ width: 'calc(33% - 10px)' }} onChange={wordInputHandler} value={wordInput} />
-					<TextField label="Synonym" sx={{ width: 'calc(33% - 10px)' }} onChange={wordSynonymHandler} value={synonymInput} />
-					<Button variant="contained" endIcon={<SendIcon />} style={addButtonStyle} onClick={addWordHandler}>
-						Add Synonym
-					</Button>
-				</Box>
+					<Box
+						display="flex"
+						flexDirection={{ xs: 'column', md: 'row' }}
+						justifyContent="center"
+						alignItems="center"
+						gap="10px"
+						width="100%"
+					>
+						<TextField
+							label="Word"
+							sx={{ width: { xs: '300px', md: 'calc(33% - 10px)' } }}
+							onChange={wordInputHandler}
+							value={wordInput}
+						/>
+						<TextField
+							label="Synonym"
+							sx={{ width: { xs: '300px', md: 'calc(33% - 10px)' } }}
+							onChange={wordSynonymHandler}
+							value={synonymInput}
+						/>
+						<Button variant="contained" endIcon={<SendIcon />} style={addButtonStyle} onClick={addWordHandler}>
+							Add Synonym
+						</Button>
+					</Box>
 
-				<Box width="400px" margin="0 auto" visibility={alertVisible ? 'visible' : 'hidden'}>
-					<Alert severity={responseStatus}>{responseMessage}</Alert>
+					<Box width="400px" margin="0 auto" visibility={alertVisible ? 'visible' : 'hidden'}>
+						<Alert severity={responseStatus}>{responseMessage}</Alert>
+					</Box>
+
+					<Box
+						display="flex"
+						flexDirection={{ xs: 'column', md: 'row' }}
+						justifyContent="center"
+						alignItems="center"
+						gap="10px"
+						width="100%"
+						marginY="20px"
+					>
+						<Autocomplete
+							id="free-solo-demo"
+							onChange={(event, newValue) => {
+								setWordSynonymHandler(event, newValue);
+							}}
+							freeSolo
+							options={allWords.map((option) => option)}
+							renderInput={(params) => <TextField {...params} label="Enter word" sx={{ width: { xs: '300px', md: 360 } }} />}
+						/>
+						<Button
+							variant="contained"
+							endIcon={<SendIcon />}
+							style={{
+								...getButtonStyle,
+								marginLeft: { xs: '0', md: '10px' },
+							}}
+							onClick={getSynonymHandler}
+						>
+							Get synonym
+						</Button>
+					</Box>
 				</Box>
 			</Container>
-			<Box display="flex" alignItems="center" justifyContent="center" spacing={2} sx={{ width: 500, marginY: '20px', marginX: 'auto' }}>
-				<Autocomplete
-					id="free-solo-demo"
-					onChange={(event, newValue) => {
-						setWordSynonymHandler(event, newValue);
-					}}
-					freeSolo
-					options={allWords.map((option) => option)}
-					renderInput={(params) => <TextField {...params} label="Enter word" sx={{ width: 360 }} />}
-				/>
-				<Button variant="contained" endIcon={<SendIcon />} style={getButtonStyle} onClick={getSynonymHandler}>
-					Get synonym
-				</Button>
-			</Box>
+
 			<Grid container justifyContent="center" spacing={1} sx={{ mt: 3 }}>
 				{getSynonymStatus === 200 && receivedSynonyms ? (
 					receivedSynonyms.map((item, index) => (

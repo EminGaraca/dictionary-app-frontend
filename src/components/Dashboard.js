@@ -230,16 +230,16 @@ export const Dashboard = () => {
 				)}
 			</Grid>
 
-			<Grid container justifyContent="center" spacing={1} sx={{ mt: 3 }}>
+			<Grid container justifyContent="center" spacing={1} sx={{ mt: 3, marginLeft: '50px' }}>
 				{data &&
 					data.map((item, index) => (
 						<Grid item xs={6} sm={4} md={3} lg={2} key={index}>
 							<Chip label={item} color="success" variant="outlined" style={{ color: '#008b8b' }} />
 						</Grid>
 					))}
-				<Grid container justifyContent="center">
-					<Pagination page={page} count={totalPages} variant="outlined" shape="rounded" sx={{ mt: 2 }} onChange={pageHandler} />
-				</Grid>
+			</Grid>
+			<Grid container justifyContent="center" sx={{ mt: 2 }}>
+				<Pagination page={page} count={totalPages} variant="outlined" shape="rounded" onChange={pageHandler} />
 			</Grid>
 		</div>
 	);

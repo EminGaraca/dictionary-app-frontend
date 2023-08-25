@@ -179,7 +179,7 @@ export const Dashboard = () => {
 						</Button>
 					</Box>
 
-					<Box width="400px" margin="0 auto" visibility={alertVisible ? 'visible' : 'hidden'}>
+					<Box width="400px" style={{ marginTop: '20px' }} visibility={alertVisible ? 'visible' : 'hidden'}>
 						<Alert severity={responseStatus}>{responseMessage}</Alert>
 					</Box>
 
